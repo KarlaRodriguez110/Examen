@@ -10,7 +10,7 @@ https://github.com/creativetimofficial/material-dashboard
 2. ejecutar el docker container up -d
 3. buscar en el navegador localhost:8080 para abrir el login 
     1. en este caso el inicio de sesion se puede usar con admin en usuario y contraseña
-    2. maria para iniciar sesion con restricciones
+    2. maria en usuario y contraseña para iniciar sesion con restricciones
 4. para ingresar al php se usa localhost:8081
      1. usuario root contraseña rootpassword
 
