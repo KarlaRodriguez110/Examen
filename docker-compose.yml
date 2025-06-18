@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: karla_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: ventasdb
+      MYSQL_USER: usuario
+      MYSQL_PASSWORD: password
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./sistema.sql:/docker-entrypoint-initdb.d/sistema.sql
+
+  web:
+    build: .
+    container_name: karla_php
+    depends_on:
+      - db
+    ports:
+      - "8080:80"
+    volumes:
+      - ./www:/var/www/html
+    environment:
+      MYSQL_HOST: db
+      MYSQL_USER: usuario
+      MYSQL_PASSWORD: password
+      MYSQL_DB: ventasdb
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: karla_phpmyadmin
+    depends_on:
+      - db
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: rootpassword
+
+volumes:
+  db_data:
